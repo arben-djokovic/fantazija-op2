@@ -4,12 +4,16 @@ import java.util.Set;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.NamedQueries;
 import jakarta.persistence.NamedQuery;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
+import me.fit.model.rest.client.IpClient;
 
 @Entity
 @NamedQueries({ 
@@ -30,8 +34,10 @@ public class Proizvod {
     private double cijena;
 
     private String smjesa;
+    
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private IpClient ipClient;
 
-    // Možete dodati dodatne atribute ili promijeniti postojeće prema potrebi
 
     public Long getId() {
         return id;
@@ -64,8 +70,6 @@ public class Proizvod {
     public void setSmjesa(String smjesa) {
         this.smjesa = smjesa;
     }
-
-    // Možete dodati gettere i settere za dodatne atribute ili promijeniti postojeće prema potrebi
 
     @Override
     public int hashCode() {
